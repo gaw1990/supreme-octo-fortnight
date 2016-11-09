@@ -5,7 +5,7 @@ class PaymentsController < ApplicationController
   end
 
   def index 
-    render json: Payment.all
+    render json: Payment.where(loan_id: params[:loan_id])
   end
   
   def show 
