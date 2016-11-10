@@ -14,14 +14,14 @@
 ActiveRecord::Schema.define(version: 20161109180451) do
 
   create_table "loans", force: :cascade do |t|
-    t.integer  "funded_amount_cents"
+    t.integer  "funded_amount_cents", null: false
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
   end
 
   create_table "payments", force: :cascade do |t|
     t.integer  "amount_cents", null: false
-    t.integer  "loan_id"
+    t.integer  "loan_id",      null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
