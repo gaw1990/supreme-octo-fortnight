@@ -9,7 +9,7 @@ RSpec.describe LoansController, type: :controller do
   end
 
   describe '#show' do
-    let(:loan) { Loan.create!(funded_amount: 100.0) }
+    let(:loan) { Loan.create!(funded_amount_cents: 100_00) }
 
     it 'responds with a 200' do
       get :show, id: loan.id
@@ -18,7 +18,7 @@ RSpec.describe LoansController, type: :controller do
 
     context 'if the loan is not found' do
       it 'responds with a 404' do
-        get :show, id: 10000
+        get :show, id: (loan.id + 1)
         expect(response).to have_http_status(:not_found)
       end
     end
