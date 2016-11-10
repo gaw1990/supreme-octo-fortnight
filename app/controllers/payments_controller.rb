@@ -13,6 +13,17 @@ class PaymentsController < ApplicationController
   end
 
   def create 
-
+    @payment = Payment.new(payment_params)
+    if @payment.save!
+      render json: 'success', status: 200
+    else 
+      render json: @payment.errors.full_messages
+    end
   end
+
+  private 
+
+  def payment_params 
+    params.permit(:amount_cents)
+  end 
 end
