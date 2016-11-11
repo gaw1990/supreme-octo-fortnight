@@ -19,7 +19,7 @@ class PaymentsController < ApplicationController
     if payment.save
       render json: 'success', status: 200
     else 
-      render json: {errors: payment.errors}, status: 422
+      render json: { errors: payment.errors }, status: 422
     end
   end
 
