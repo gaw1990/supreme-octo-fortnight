@@ -13,17 +13,19 @@ class PaymentsController < ApplicationController
   end
 
   def create 
-    @payment = Payment.new(payment_params)
-    if @payment.save!
+    loan = Loan.find(payment_params[:loan_id])
+    payment = loan.payments.new(payment_params[:payment])
+
+    if payment.save
       render json: 'success', status: 200
     else 
-      render json: @payment.errors.full_messages
+      render json: {errors: payment.errors}, status: 422
     end
   end
 
   private 
 
   def payment_params 
-    params.permit(:amount_cents)
+    params.permit(:loan_id, payment: [ :amount_cents ])
   end 
 end
